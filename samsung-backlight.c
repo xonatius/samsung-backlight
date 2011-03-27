@@ -188,6 +188,24 @@ static struct dmi_system_id __initdata samsung_dmi_table[] = {
                 },
                 .callback = dmi_check_cb,
         },
+        {
+                .ident = "N220",
+                .matches = {
+                         DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
+                         DMI_MATCH(DMI_PRODUCT_NAME, "N220"),
+                         DMI_MATCH(DMI_BOARD_NAME, "N220"),
+                },
+                .callback = dmi_check_cb,
+        },
+        {
+                .ident = "N230",
+                .matches = {
+                         DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
+                         DMI_MATCH(DMI_PRODUCT_NAME, "N230"),
+                         DMI_MATCH(DMI_BOARD_NAME, "N230"),
+                },
+                .callback = dmi_check_cb,
+        },
 
         { },
 };
@@ -261,3 +279,5 @@ MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnX360:*:rnX360:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnR518:*:rnR518:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnR510/P510:*:rnR510/P510:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnNF110/NF210/NF310:*:rnNF110/NF210/NF310:*");
+MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnN220:*:rnN220:*");
+MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnN230:*:rnN230:*");
