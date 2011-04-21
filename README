@@ -32,7 +32,7 @@ Have a similar problem, but need more information to add it (if you are owner of
 
 ## Installation
 
-git clone https://xonatius@github.com/xonatius/samsung-backlight.git
+git clone git://github.com/xonatius/samsung-backlight.git
 cd samsung-backlight
 make
 sudo make install
