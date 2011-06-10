@@ -1,6 +1,6 @@
 /*
  * Samsung N130, N220, N230 NC10, Np-Q45, R468/R418, X320/X420/X520, X360,
- * R518, R510/P510, R410, NF110/NF210/NF310, N350 and R470/R420 
+ * R518, R510/P510, R410, NF110/NF210/NF310, N350, R470/R420, R528/R728
  * Laptop Backlight driver
  *
  * Copyright (C) 2011 Peter Savichev (proton) (psavichev@gmail.com)
@@ -226,6 +226,15 @@ static struct dmi_system_id __initdata samsung_dmi_table[] = {
                 },
                 .callback = dmi_check_cb,
         },
+        {
+                .ident = "R528/R728",
+                .matches = {
+                         DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
+                         DMI_MATCH(DMI_PRODUCT_NAME, "R528/R728"),
+                         DMI_MATCH(DMI_BOARD_NAME, "R528/R728"),
+                },
+                .callback = dmi_check_cb,
+        },
         { },
 };
 
@@ -240,8 +249,8 @@ static int __init samsung_init(void)
         /*
          * The Samsung N120, N130, and NC10 use pci device id 0x27ae, while the
          * NP-Q45 uses 0x2a02
-         * R410P, R468/R418, R518, R510/P510, X320/X420/X520, X360 and R470/R420 
-         * uses 0x2a42
+         * R410P, R468/R418, R518, R510/P510, X320/X420/X520, X360, R470/R420 
+         * and R528/R728 uses 0x2a42
          * N220, NF110/NF210/NF310 and N350 uses 0xa011
          * Odds are we might need to add more to the
          * list over time...
@@ -303,3 +312,4 @@ MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnN220:*:rnN220:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnN230:*:rnN230:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnN350:*:rnN350:*");
 MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnR470/R420:*:rnR470/R420:*");
+MODULE_ALIAS("dmi:*:svnSAMSUNGELECTRONICSCO.,LTD.:pnR528/R728:*:rnR528/R728:*");
