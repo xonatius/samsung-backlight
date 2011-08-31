@@ -32,9 +32,9 @@
  * overkill, that's fine.  So let's map the 256 values to 8 different ones:
  *
  * userspace     0    1    2    3    4    5    6    7
- * hardware     31   63   95  127  159  195  223  255
+ * hardware      3   39   75   111  147  183  219  255
  *
- * or hardware = ((userspace + 1) * 32)-1
+ * or hardware = (userspace * 36) + 3
  *
  * Note, we keep value 0 at a positive value, otherwise the screen goes
  * blank because HAL likes to set the backlight to 0 at startup when there is
@@ -55,7 +55,7 @@ static u8 read_brightness(void)
         u8 user_brightness = 0;
 
         pci_read_config_byte(pci_device, offset, &kernel_brightness);
-        user_brightness = ((kernel_brightness + 1) / 32) - 1;
+        user_brightness = (kernel_brightness - 3) / 36;
         return user_brightness;
 }
 
@@ -63,7 +63,7 @@ static void set_brightness(u8 user_brightness)
 {
         u16 kernel_brightness = 0;
 
-        kernel_brightness = ((user_brightness + 1) * 32) - 1;
+        kernel_brightness = (user_brightness * 36) + 3;
         pci_write_config_byte(pci_device, offset, (u8)kernel_brightness);
 }
 
@@ -249,14 +249,14 @@ static int __init samsung_init(void)
         /*
          * The Samsung N120, N130, and NC10 use pci device id 0x27ae, while the
          * NP-Q45 uses 0x2a02
-         * R410P, R468/R418, R518, R510/P510, X320/X420/X520, X360, R470/R420 
+         * R410P, R468/R418, R518, R510/P510, X320/X420/X520, X360, R470/R420
          * and R528/R728 uses 0x2a42
          * N220, NF110/NF210/NF310 and N350 uses 0xa011
          * Odds are we might need to add more to the
          * list over time...
          */
         pci_device = pci_get_device(PCI_VENDOR_ID_INTEL, 0x27ae, NULL);
-        if (!pci_device) 
+        if (!pci_device)
                 pci_device = pci_get_device(PCI_VENDOR_ID_INTEL, 0x2a02, NULL);
         if (!pci_device)
                 pci_device = pci_get_device(PCI_VENDOR_ID_INTEL, 0x2a42, NULL);
@@ -264,7 +264,7 @@ static int __init samsung_init(void)
                 pci_device = pci_get_device(PCI_VENDOR_ID_INTEL, 0xa011, NULL);
         if (!pci_device)
                 return -ENODEV;
-        
+
 
         /* create a backlight device to talk to this one */
         backlight_device = backlight_device_register("samsung",
